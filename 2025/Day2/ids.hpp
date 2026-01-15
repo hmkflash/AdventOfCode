@@ -4,9 +4,13 @@
 #include <cstdlib>
 #include <cmath>
 #include <vector>
+#include <algorithm>
 
-//int checkIdsOne(std::vector<int> &arr, int lowerBound, int upperBound);1
-//int sumIds();
-void partOne();
+#define ull unsigned long long 
+
+ull partOne();
+ull partTwo();
+void validateIDs();
+void sumIDs();
 //int main(int argc, char* argv[]);
 int main();

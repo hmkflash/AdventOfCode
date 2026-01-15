@@ -1,45 +1,124 @@
 #include "ids.hpp"
 
-void partOne()
+ull sum = 0; // This is the sum of the ids for each part.
+// These vectors will be used only for part 2 and refreshed after each range/
+std::vector<ull> repeatedIDs; // This vector contains IDs which may be repeated during the insertion process.
+std::vector<ull> unrepeatedIDs; // This vector contains a single copy of each ID within the other vector.
+
+ull partOne()
 {
+	sum = 0;
 	std::string line;
 	std::ifstream input ("input.txt");
 	std::ofstream output ("logPart1.txt");
 	if (input.is_open() && output.is_open())
 	{
-		while (std::getline(input, line))
+		output << "range\n" << "\tInvalid Ids\n\n";
+		
+		while (std::getline(input, line, ','))
 		{
-			while (!line.empty())
+			int dashIndex = line.find('-');
+			std::string minstr = line.substr(0, dashIndex);
+			std::string maxstr = line.substr(dashIndex + 1, line.length() - dashIndex);
+			ull min = stoull(minstr); ull max = stoull(maxstr);
+			output << line << std::endl;
+			ull curID = 0; // The ID that will be verified as valid ot invalid.
+			// i is the number of digits for which we are repeating.
+			for (int i = minstr.length() / 2; i <= (int) maxstr.length() / 2; i++)
 			{
-				int dashIndex = line.find('-');
-				// The index at which the "," is located or after the last char.
-				int commaIndex; {int temp = line.find(','); commaIndex = (temp != (int) std::string::npos) ? temp : line.length();} 
-				std::string minstr = line.substr(0, dashIndex - 1);
-				std::string maxstr = line.substr(dashIndex + 1, commaIndex - dashIndex - 1);
-				int min = stoi(minstr); int max = stoi(maxstr);
-				line.erase(0, commaIndex);
-				if (line.find(',') == 0) {line.erase(0, 1);}
-				int curID = 0; // The ID that will be verified as valid ot invalid.
-				// i is the number of digits for which we are repeating.
-				for (int i = minstr.length() / 2; curID <= max; i++)
+				// j is the iterator for each possible invalid id.	
+				for (ull j = (ull) (pow(10, i - 1)); j <= (ull) (pow(10, i) - 1); j++)
 				{
-					// j is the iterator for each possible invalid id.	
-					for (int j = (int) (pow(10, i - 1)); j < (int) (pow(10, i) - 1); j++)
+					std::string idsubstr = std::to_string(j); // Converts j into a string.
+					std::string idstr = idsubstr + idsubstr; // Conconates the substrings together.
+					curID = stoull(idstr); // Creates an invalid id, that may be within the range in question.
+					if (min <= curID && curID <= max)
 					{
-						std::string idsubstr = std::to_string(j); // Converts j into a string.
-						std::string idstr = idsubstr + idsubstr; // Conconates the substrings together.
-						curID = stoi(idstr); // Creates an invalid id, that may be within the range in question.
+						sum += curID;
+						output << "\t" << curID << std::endl;
 					}
 				}
 			}
+			output << std::endl;
 		}
 	}
 	input.close();
 	output.close();
+	return sum;
+}
+
+ull partTwo()
+{
+	sum = 0;
+	std::string line;
+	std::ifstream input ("input.txt");
+	std::ofstream output ("logPart2.txt");
+	if (input.is_open() && output.is_open())
+	{
+		output << "range\n" << "\tInvalid Ids\n\n";
+		while (std::getline(input, line, ','))
+		{
+			repeatedIDs.clear();
+			unrepeatedIDs.clear();
+			int dashIndex = line.find('-');
+			std::string minstr = line.substr(0, dashIndex);
+			std::string maxstr = line.substr(dashIndex + 1, line.length() - dashIndex);
+			ull min = stoull(minstr); ull max = stoull(maxstr);
+			output << line << std::endl;
+			ull curID = 0;
+			for (int i = 1; i <= (int) maxstr.length() / 2; i++)
+			{
+				for (int j = 2; i * j <= (int) maxstr.length(); j++)
+				{
+					for (ull k = (ull) (pow(10, i - 1)); k <= (ull) (pow(10, i) - 1); k++)
+					{
+						std::string idsubstr = std::to_string(k);
+						std::string idstr = idsubstr;
+						for (int l = 1; l < j; l++) {idstr += idsubstr;}
+						curID = stoull(idstr);
+						if (min <= curID && curID <= max)
+						{
+							repeatedIDs.push_back(curID);
+						}
+					}
+				}
+			}
+			std::sort(repeatedIDs.begin(), repeatedIDs.end());
+			validateIDs();
+			std::vector<ull>::iterator it;
+			for (it = unrepeatedIDs.begin(); it != unrepeatedIDs.end(); ++it)
+			{
+				output << "\t" << *it << std::endl;
+			}
+			output << std::endl;
+		}
+	}
+	input.close();
+	output.close();
+	return sum;
+}
+
+void validateIDs()
+{
+	std::vector<ull>::iterator it;
+	for (it = repeatedIDs.begin(); it != repeatedIDs.end(); ++it)
+	{
+		if (unrepeatedIDs.empty())
+		{
+			unrepeatedIDs.push_back(*it);
+			sum += *it;
+		}
+		else if (unrepeatedIDs.back() != *it)
+		{
+			unrepeatedIDs.push_back(*it);
+			sum += *it;
+		}
+	}
 }
 
 int main()
 {
-	partOne();
-	return 1;
+	std::cout << "Sum of invalid IDs for part one: " << partOne() << std::endl;
+	std::cout << "Sum of invalid IDs for part two: " << partTwo() << std::endl;
+	return 0;
 }
