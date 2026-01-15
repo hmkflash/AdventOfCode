@@ -1,7 +1,25 @@
+/**
+ * @author Holden Kuempel
+ * 
+ * This program was developed to solve the 2025 Advent of Code Day 3, parts 1 and 2.
+ * 
+ * The challenge involves a series of battery packs. You need to maximize the voltage of each pack. In part one,
+ * this is done by finding the largest 2 digit number within a string of numbers. The digits do not need to be 
+ * adjacent, but the proper order must be perserved. Part two, is the same, you must create a 12-digit number.
+ * The answer to each part of the puzzle is the sum of these highest possible voltages of each bank.
+ * 
+ * This program may take in an argument of 1 or 2. If it is provided it will only run that part of the challenge.
+ * Otherwise, it will run both parts.
+ * 
+ * To complete this challenge yourself go to: https://adventofcode.com/2025/day/3
+ */
+
 #include "batteries.hpp"
 
-ll sum;
+ll sum; // This will the sum of all highest voltages for each part.
 
+// partOne is solved with a brute force approach that tries each possible combination of two digit values for 
+// each line.
 ll partOne()
 {
 	sum = 0;
@@ -38,6 +56,8 @@ ll partOne()
 	return sum;
 }
 
+// partTwo is solved with implementing a greedy algorithm that prioritizes the most significant digit to "min-max"
+// the solution.
 ll partTwo()
 {
 	sum = 0;

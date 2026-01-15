@@ -123,6 +123,8 @@ int rotateDialTwo(int distance)
 	}
 }
 
+// partOne is solved by incrementing dials one at a time, recursively. Checking after rotateDialOne is called to 
+// see if it ends in o.
 void partOne() 
 {
 	reset();
@@ -158,6 +160,8 @@ void partOne()
 	output.close();
 }
 
+// partTwo is very similar to partOne, but the rotateDialsTwo function increments the zero count whenever zero is
+// reached, not just when an instruction ends on a zero.
 void partTwo()
 {
 	reset();
