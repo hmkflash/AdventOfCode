@@ -5,4 +5,4 @@ run:
 	./ids
 
 clean:
-	rm ids logPart1.txt logPart2.txt
+	rm -f ids logPart1.txt logPart2.txt

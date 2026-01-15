@@ -18,5 +18,5 @@ ull partTwo();
 // validates the IDs so that there are no dublicates within a single range.
 void validateIDs();
 
-// Takes in argumenbts to determine which parts to run.
+// Takes in arguments to determine which parts to run.
 int main(int argc, char* argv[]);

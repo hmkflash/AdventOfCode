@@ -5,4 +5,4 @@ run:
 	./dials
 
 clean:
-	rm dials logPart1.txt logPart2.txt
+	rm -f dials logPart1.txt logPart2.txt
