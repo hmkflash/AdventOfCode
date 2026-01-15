@@ -10,6 +10,8 @@
  *
  * This program may take in an argument of 1 or 2. If it is provided it will only run that part of the challenge.
  * Otherwise, it will run both parts.
+ *
+ * To complete this challenge yourself go to: https://adventofcode.com/2025/day/1
  */
 
 #include "dials.hpp"
@@ -201,7 +203,8 @@ int main(int argc, char* argv[]) {
 	{
 		std::cout << "Running Just Part Two" << std::endl;
 		partTwo();
-		std::cout << "Number of zeroes: " << zeroCount << std::endl;	
+		std::cout << "Number of zeroes: " << zeroCount << std::endl;
+		return 0;	
 	}
 	else
 	{

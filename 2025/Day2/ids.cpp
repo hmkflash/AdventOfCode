@@ -1,3 +1,21 @@
+/**
+ * 
+ * @author Holden Kuempel
+ * 
+ * This program was developed to solve the 2025 Advent of Code Day 2, parts 1 and 2.
+ * 
+ * The challenge involves a series of ID ranges with various invalid IDs sprinkled in. An ID is considered 
+ * invalid if it is composed of entirely repeated parts.In part 1 of this challenge an ID is considered invalid 
+ * if it is made up of exactly two repeated parts, like 11 or 1212. However in part 2 of this challenge any 
+ * number of repeated components are consider invalid which would still include numbers like 11 and 1212, 
+ * but also 111 and 12121212. The actual solution to solving these parts however, is the sumation of invalid 
+ * IDs, not the number of them.
+ *
+ * This program may take in an argument of 1 or 2. If it is provided it will only run that part of the challenge.
+ * Otherwise, it will run both parts.
+ *
+ * To complete this challenge yourself go to: https://adventofcode.com/2025/day/2
+ */
 #include "ids.hpp"
 
 ull sum = 0; // This is the sum of the ids for each part.
@@ -116,9 +134,24 @@ void validateIDs()
 	}
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-	std::cout << "Sum of invalid IDs for part one: " << partOne() << std::endl;
-	std::cout << "Sum of invalid IDs for part two: " << partTwo() << std::endl;
-	return 0;
+	if (argc >= 2 && *argv[1] == '1')
+	{
+		std::cout << "Running just Part One" << std::endl;
+		std::cout << "Sum of invalid IDs: " << partOne() << std::endl;
+		return 0;
+	}
+	else if (argc >= 2 && *argv[1] == '2')
+	{
+		std::cout << "Running Just Part Two" << std::endl;
+		std::cout << "Sum of invalid IDs: " << partTwo() << std::endl;
+		return 0;
+	}
+	else
+	{
+		std::cout << "Sum of invalid IDs for part one: " << partOne() << std::endl;
+		std::cout << "Sum of invalid IDs for part two: " << partTwo() << std::endl;
+		return 0;
+	}
 }

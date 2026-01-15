@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+# input data for advent of code
+input.txt
+
+# debug info for advent of code
+logPart1.txt
+logPart2.txt
