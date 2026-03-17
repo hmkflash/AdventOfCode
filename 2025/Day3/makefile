@@ -1,14 +1,24 @@
-compile:
-	g++ batteries.cpp -o batteries
+CPPC=g++
+CPPFLAGS=-Wall -pedantic -g
 
+all: batteries
+batteries: bateries.o
+	$(CPPC) $(CPPFLAGS) -o batteries batteries.o
+dails.o:
+	$(CPPC) $(CPPFLAGS) -c batteries.c
+
+.PHONY: run
 run:
 	./batteries
 
+.PHONY: partOne
 partOne:
 	./batteries 1
 
+.PHONY: partTwo
 partTwo:
 	./batteries 2
 
+.PHONY: clean
 clean:
-	rm -f batteries logPart1.txt logPart2.txt
+	rm -f batteries log* *.c

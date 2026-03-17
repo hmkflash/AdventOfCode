@@ -5,7 +5,7 @@ Each year has its own directory that you can view which also has further directo
 self-study C++ had I saw Advent Of Code not only as a tool for doing so, but also as a broader method for 
 furthering my professional development in the industry.
 
-Each day has a makefile with the commands "compile", "run", "partOne", "partTwo", and "clean". "compile" and 
+Each day has a makefile with the commands "all", "run", "partOne", "partTwo", and "clean". "all" and 
 "clean" do as you would expect; creating an executable and removing files respectively. "run" runs both parts of 
 the challenge whereas "partOne" and "partTwo" only run their respective parts.
 
