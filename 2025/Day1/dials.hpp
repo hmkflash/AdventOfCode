@@ -13,10 +13,10 @@ int rotateDialOne(int distance);
 int rotateDialTwo(int distance);
 
 // Calculates the number of times an instruction ends on a zero.
-void partOne();
+int partOne(std::string inputName);
 
 // Calculates the number of times zero is encountered
-void partTwo();
+int partTwo(std::string inputName);
 
 // Takes in arguments to determine which parts to run
 int main(int argc, char* argv[]);

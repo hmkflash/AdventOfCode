@@ -9,16 +9,17 @@ dails.o:
 
 .PHONY: run
 run:
-	./dials
+	./dials input.txt
 
 .PHONY: partOne
 partOne:
-	./dials 1
+	./dials input.txt 1
 
 .PHONY: partTwo
 partTwo:
-	./dials 2
+	./dials input.txt 2
 	
 .PHONY: clean
 clean:
 	rm -f dials log* *.o
+

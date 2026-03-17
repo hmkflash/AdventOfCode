@@ -125,11 +125,11 @@ int rotateDialTwo(int distance)
 
 // partOne is solved by incrementing dials one at a time, recursively. Checking after rotateDialOne is called to 
 // see if it ends in o.
-void partOne() 
+int partOne(std::string inputName) 
 {
 	reset();
 	std::string line; // The current line of iteration through the input.
-	std::ifstream input ("input.txt"); // The input source for the program.
+	std::ifstream input (inputName); // The input source for the program.
 	std::ofstream output ("logPart1.txt"); // The output file for the program, which will contain each instruction that ends with the dial on zero.
 	if (input.is_open() && output.is_open())
 	{
@@ -158,15 +158,16 @@ void partOne()
 	}
 	input.close();
 	output.close();
+	return zeroCount;
 }
 
 // partTwo is very similar to partOne, but the rotateDialsTwo function increments the zero count whenever zero is
 // reached, not just when an instruction ends on a zero.
-void partTwo()
+int partTwo(std::string inputName)
 {
 	reset();
 	std::string line; // The current line of iteration through the input.
-	std::ifstream input ("input.txt"); // The input source for the program.
+	std::ifstream input (inputName); // The input source for the program.
 	std::ofstream output ("logPart2.txt"); // The output file for the program, which will contain each instruction and how many times it hits a zero.
 	if (input.is_open() && output.is_open())
 	{
@@ -193,30 +194,32 @@ void partTwo()
 	}
 	input.close();
 	output.close();
+	return zeroCount;
 }
 
 int main(int argc, char* argv[]) {
-	if (argc >= 2 && *argv[1] == '1') 
+	if (argc >= 3 && *argv[2] == '1') 
 	{
 		std::cout << "Running Just Part One" << std::endl;
-		partOne();
-		std::cout << "Number of zeroes: " << zeroCount << std::endl;
+		std::cout << "Number of zeroes: " << partOne(argv[1]) << std::endl;
 		return 0;
 	}
-	else if (argc >= 2 && *argv[1] == '2')
+	else if (argc >= 3 && *argv[2] == '2')
 	{
 		std::cout << "Running Just Part Two" << std::endl;
-		partTwo();
-		std::cout << "Number of zeroes: " << zeroCount << std::endl;
+		std::cout << "Number of zeroes: " << partTwo(argv[1]) << std::endl;
 		return 0;	
+	}
+	else if (argc >= 2)
+	{
+		std::cout << "Running Both Parts" << std::endl;
+		std::cout << "Number of zeroes for Part One: " << partOne(argv[1]) << std::endl;
+		std::cout << "Number of zeroes for Part Two: " << partTwo(argv[1]) << std::endl;
+		return 0;
 	}
 	else
 	{
-		std::cout << "Running Both Parts" << std::endl;
-		partOne();
-		std::cout << "Number of zeroes for Part One: " << zeroCount << std::endl;
-		partTwo();
-		std::cout << "Number of zeroes for Part Two: " << zeroCount << std::endl;
-		return 0;
+		std::cerr << "No input file provided, first argument should be the name of the input file" << std::endl;
+		return -1;
 	}
 }
