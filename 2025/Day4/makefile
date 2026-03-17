@@ -11,4 +11,4 @@ partTwo:
 	./paper 2
 
 clean:
-	rm -f paper logPart1.txt logPart2.txt
+	rm -f paper log*
