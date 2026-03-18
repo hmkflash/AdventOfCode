@@ -5,7 +5,7 @@ all: batteries
 batteries: bateries.o
 	$(CPPC) $(CPPFLAGS) -o batteries batteries.o
 dails.o:
-	$(CPPC) $(CPPFLAGS) -c batteries.c
+	$(CPPC) $(CPPFLAGS) -c batteries.cpp
 
 .PHONY: run
 run:

@@ -5,7 +5,7 @@ all: paper
 paper: paper.o
 	$(CPPC) $(CPPFLAGS) -o paper paper.o
 paper.o:
-	$(CPPC) $(CPPFLAGS) -c paper.c
+	$(CPPC) $(CPPFLAGS) -c paper.cpp
 
 .PHONY: run
 run:
