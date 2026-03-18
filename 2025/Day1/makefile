@@ -5,7 +5,7 @@ all: dials
 dials: dials.o
 	$(CPPC) $(CPPFLAGS) -o dials dials.o
 dails.o:
-	$(CPPC) $(CPPFLAGS) -c dials.c
+	$(CPPC) $(CPPFLAGS) -c dials.cpp
 
 .PHONY: run
 run:

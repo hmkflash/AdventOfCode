@@ -10,10 +10,10 @@
 #define ull unsigned long long 
 
 // Calculates the total sum of all invalid IDs as defined by part one.
-ull partOne();
+ull partOne(std::string inputName);
 
 // Calculates the total sum of all invalid IDs as defined by part two.
-ull partTwo();
+ull partTwo(std::string inputName);
 
 // validates the IDs so that there are no dublicates within a single range.
 void validateIDs();

@@ -5,19 +5,19 @@ all: ids
 ids: ids.o
 	$(CPPC) $(CPPFLAGS) -o ids ids.o
 ids.o: 
-	$(CPPC) $(CPPFLAGS) -c ids.c
+	$(CPPC) $(CPPFLAGS) -c ids.cpp
 
 .PHONY: run
 run: 
-	./ids
+	./ids input.txt
 
 .PHONY: partOne
 partOne:
-	./ids 1
+	./ids input.txt 1
 
 .PHONY: partTwo
 partTwo:
-	./ids 2
+	./ids input.txt 2
 
 .PHONY: clean
 clean:
