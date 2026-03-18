@@ -8,8 +8,8 @@
  * an instruction. Part Two of the challenge wanted me to count the number of total times that zero was 
  * encountered during the instruction set.
  *
- * This program may take in an argument of 1 or 2. If it is provided it will only run that part of the challenge.
- * Otherwise, it will run both parts.
+ * This program requires the name of an input file as the first argument and may take in an argument of 1 or 2. If 
+ * it is provided it will only run that part of the challenge. Otherwise, it will run both parts.
  *
  * To complete this challenge yourself go to: https://adventofcode.com/2025/day/1
  */

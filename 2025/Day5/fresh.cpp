@@ -1,3 +1,18 @@
+/**
+ * @author Holden Kuempel
+ * 
+ * This program was developed to solve the 2025 Advent of Code Day 5, parts 1 and 2.
+ * 
+ * The challenge involves a series of ids ranges and individual ids. In part one, it wanted the number of ids 
+ * from the series of individual ids that are included in the series of ranges (those that are fresh). In part 
+ * two, it wanted the total number of fresh ids as described from the series of fresh id ranges.
+ * 
+ * This program requires the name of an input file as the first argument and may take in an argument of 1 or 2. If 
+ * it is provided it will only run that part of the challenge. Otherwise, it will run both parts.
+ * 
+ * To complete this challenge yourself go to: https://adventofcode.com/2025/day/5
+ */
+
 #include "fresh.hpp"
 
 std::vector<entry> ranges;

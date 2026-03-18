@@ -11,8 +11,8 @@
  * but also 111 and 12121212. The actual solution to solving these parts however, is the sumation of invalid 
  * IDs, not the number of them.
  *
- * This program may take in an argument of 1 or 2. If it is provided it will only run that part of the challenge.
- * Otherwise, it will run both parts.
+ * This program requires the name of an input file as the first argument and may take in an argument of 1 or 2. If 
+ * it is provided it will only run that part of the challenge. Otherwise, it will run both parts.
  *
  * To complete this challenge yourself go to: https://adventofcode.com/2025/day/2
  */
