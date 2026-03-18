@@ -231,7 +231,7 @@ int main(int argc, char* argv[])
 	else if (argc >= 2)
 	{
 		std::cout << "Accessible rolls for Part One: " << partOne(argv[1]) << std::endl;
-		std::cout << "Accessible rolld for Part Two: " << partTwo(argv[1]) << std::endl;
+		std::cout << "Accessible rolls for Part Two: " << partTwo(argv[1]) << std::endl;
 		return 0;
 	}
 	else
