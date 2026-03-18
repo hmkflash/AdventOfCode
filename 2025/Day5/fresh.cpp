@@ -15,8 +15,8 @@
 
 #include "fresh.hpp"
 
-std::vector<entry> ranges;
-std::vector<ull> ids;
+std::vector<entry> ranges; // A vector containing the series of id ranges
+std::vector<ull> ids; // A vector containing the series of individual ids.
 
 void parseData(std::string inputName) {
 	std::string line;
@@ -38,6 +38,11 @@ void parseData(std::string inputName) {
 	input.close();
 }
 
+// condense checks over curRanges after it has been sorted checking to see if a range overlaps with its next 
+// neighbor. If it does then it "condenses" the range keeping the min of curRange[i] and the max of curRange[i+1] 
+// and then erases curRange[i+1]. This is done as a way of handling potienal errors that may be made within 
+// parseRange as if a range is extended, there is no additional checking within parseRange to check to see if the
+// range extention doesn't extend into a new range. Instead, that case is handled here.
 void condense(std::vector<entry> &curRanges)
 {
 	for (size_t i = 0; i < curRanges.size() - 1; i++)
@@ -63,6 +68,12 @@ void sort(std::vector<entry> &curRanges)
 	}
 }
 
+// parseRange takes in a range and adds it to curRanges without creating overlap. It does this by identifying 
+// several cases in which in ranges can be added. Case 1: if curRanges is empty, then we just add range to it.
+// Case 2: range is entirely inside an already exisitng range and therefore it doesn't add range at all.
+// Case 3: has several sub-cases, but just looks to see if range extends an already existing range, in which 
+// case it will extend the pre-exisiting range rather than adding the new one. Case 4: is that the new range is 
+// completely outisde of all exisiting ranges, then it just gets added.
 void parseRange(entry range, std::vector<entry> &curRanges) {
 	// Case 1: data structure is empty
 	if (curRanges.empty()) {curRanges.push_back(range); return;}
@@ -120,6 +131,8 @@ ull partOne() {
 	return count;
 }
 
+// Iterates over each id range in ranges and adds them to parsedRanges in such a way as to eliminate overlap 
+// between ranges. It does this primarily within parseRange.
 ull partTwo() {
 	std::vector<entry> parsedRanges;
 	for (entry range : ranges) {
