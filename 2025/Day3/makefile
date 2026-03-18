@@ -2,22 +2,22 @@ CPPC=g++
 CPPFLAGS=-Wall -pedantic -g
 
 all: batteries
-batteries: bateries.o
+batteries: batteries.o
 	$(CPPC) $(CPPFLAGS) -o batteries batteries.o
-dails.o:
+batteries.o:
 	$(CPPC) $(CPPFLAGS) -c batteries.cpp
 
 .PHONY: run
 run:
-	./batteries
+	./batteries input.txt
 
 .PHONY: partOne
 partOne:
-	./batteries 1
+	./batteries input.txt 1
 
 .PHONY: partTwo
 partTwo:
-	./batteries 2
+	./batteries input.txt 2
 
 .PHONY: clean
 clean:

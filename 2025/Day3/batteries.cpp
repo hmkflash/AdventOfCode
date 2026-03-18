@@ -20,11 +20,11 @@ ll sum; // This will the sum of all highest voltages for each part.
 
 // partOne is solved with a brute force approach that tries each possible combination of two digit values for 
 // each line.
-ll partOne()
+ll partOne(std::string inputName)
 {
 	sum = 0;
 	std::string line;
-	std::ifstream input ("input.txt");
+	std::ifstream input (inputName);
 	std::ofstream output ("logPart1.txt");
 	if (input.is_open() && output.is_open())
 	{
@@ -58,11 +58,11 @@ ll partOne()
 
 // partTwo is solved with implementing a greedy algorithm that prioritizes the most significant digit to "min-max"
 // the solution.
-ll partTwo()
+ll partTwo(std::string inputName)
 {
 	sum = 0;
 	std::string line;
-	std::ifstream input ("input.txt");
+	std::ifstream input (inputName);
 	std::ofstream output ("logPart2.txt");
 	if (input.is_open() && output.is_open())
 	{
@@ -108,22 +108,27 @@ ll ptGreedy(std::string line)
 
 int main(int argc, char* argv[])
 {
-	if (argc >= 2 && *argv[1] == '1')
+	if (argc >= 3 && *argv[2] == '1')
 	{
 		std::cout << "Running just Part One" << std::endl;
-		std::cout << "The total voltage: " << partOne() << std::endl;
+		std::cout << "The total voltage: " << partOne(argv[1]) << std::endl;
 		return 0;
 	}
-	else if (argc >= 2 && *argv[1] == '2')
+	else if (argc >= 3 && *argv[2] == '2')
 	{
 		std::cout << "Running just Part Two" << std::endl;
-		std::cout << "The total voltage: " << partTwo() << std::endl;
+		std::cout << "The total voltage: " << partTwo(argv[1]) << std::endl;
+		return 0;
+	}
+	else if (argc >= 2)
+	{
+		std::cout << "The total voltage for Part One: " << partOne(argv[1]) << std::endl;
+		std::cout << "The total voltage for Part Two: " << partTwo(argv[1]) << std::endl;
 		return 0;
 	}
 	else
 	{
-		std::cout << "The total voltage for Part One: " << partOne() << std::endl;
-		std::cout << "The total voltage for Part Two: " << partTwo() << std::endl;
-		return 0;
+		std::cerr << "No input file provided, first argument should be the name of the input file" << std::endl;
+		return -1;
 	}
 }
