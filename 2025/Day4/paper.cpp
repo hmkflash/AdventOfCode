@@ -17,51 +17,28 @@
 // dataSet is a vector of vectors containing the individual chars of the data.
 std::vector<std::vector<char>> dataSet;
 
-int main(int argc, char* argv[])
+// dataSet copies the data of the inputName file into a format that can be more easily accessed.
+void parseData(std::string inputName)
 {
-	if (argc >= 2 && *argv[1] == '1')
+	dataSet.clear();
+	if (dataSet.empty())
 	{
-		std::cout << "Running just Part One" << std::endl;
-		std::cout << "Accessible rolls: " << partOne() << std::endl;
-		return 0;
+		std::string line;
+		std::ifstream input (inputName);
+		if (input.is_open())
+		{
+			while (getline(input, line))
+			{
+				std::vector<char> tempVector;
+				for (int i = 0; i < (int) line.length(); i++)
+				{
+					tempVector.push_back(line.at(i));
+				}
+				dataSet.push_back(tempVector);
+			}
+			input.close();	
+		}
 	}
-	else if (argc >= 2 && *argv[1] == '2')
-	{
-		std::cout << "Running just Part Two" << std::endl;
-		std::cout << "Accessible rolls: " << partTwo() << std::endl;
-		return 0;
-	}
-	else
-	{
-		std::cout << "Accessible rolls for Part One: " << partOne() << std::endl;
-		std::cout << "Accessible rolld for Part Two: " << partTwo() << std::endl;
-		return 0;
-	}
-}
-
-int partOne()
-{
-	parseData("input.txt");
-	return parseOneRound("logPart1.txt");
-}
-
-int partTwo()
-{
-	unsigned long long count = 0; // Total number of rolls removed.
-	parseData("input.txt");
-	std::string logRoot = "logPart2-";
-	int countOfCalls = 1; // Kept track of for the sake of log tracking.
-	std::string logPrefix = ".txt";
-	int updatedCount = parseOneRound(logRoot + std::to_string(countOfCalls) + logPrefix);
-	count += updatedCount; // updatedCount is the number of rolls removed after the most recent iteration.
-	while (updatedCount > 0) // Runs until nothing can be removed.
-	{
-		parseData(logRoot + std::to_string(countOfCalls) + logPrefix);
-		countOfCalls++;
-		updatedCount = parseOneRound(logRoot + std::to_string(countOfCalls) + logPrefix);
-		count += updatedCount;
-	}
-	return count;
 }
 
 // This function will iterate through the dataSet and count the number of rolls of paper that can be moved based 
@@ -212,26 +189,54 @@ int parseOneRound(std::string log)
 	return count;
 }
 
-// dataSet copies the data of the inputName file into a format that can be more easily accessed.
-void parseData(std::string inputName)
+int partOne(std::string inputName)
 {
-	dataSet.clear();
-	if (dataSet.empty())
+	parseData(inputName);
+	return parseOneRound("logPart1.txt");
+}
+
+int partTwo(std::string inputName)
+{
+	unsigned long long count = 0; // Total number of rolls removed.
+	parseData(inputName);
+	std::string logRoot = "logPart2-";
+	int countOfCalls = 1; // Kept track of for the sake of log tracking.
+	std::string logPrefix = ".txt";
+	int updatedCount = parseOneRound(logRoot + std::to_string(countOfCalls) + logPrefix);
+	count += updatedCount; // updatedCount is the number of rolls removed after the most recent iteration.
+	while (updatedCount > 0) // Runs until nothing can be removed.
 	{
-		std::string line;
-		std::ifstream input (inputName);
-		if (input.is_open())
-		{
-			while (getline(input, line))
-			{
-				std::vector<char> tempVector;
-				for (int i = 0; i < (int) line.length(); i++)
-				{
-					tempVector.push_back(line.at(i));
-				}
-				dataSet.push_back(tempVector);
-			}
-			input.close();	
-		}
+		parseData(logRoot + std::to_string(countOfCalls) + logPrefix);
+		countOfCalls++;
+		updatedCount = parseOneRound(logRoot + std::to_string(countOfCalls) + logPrefix);
+		count += updatedCount;
+	}
+	return count;
+}
+
+int main(int argc, char* argv[])
+{
+	if (argc >= 3 && *argv[2] == '1')
+	{
+		std::cout << "Running just Part One" << std::endl;
+		std::cout << "Accessible rolls: " << partOne(argv[1]) << std::endl;
+		return 0;
+	}
+	else if (argc >= 3 && *argv[2] == '2')
+	{
+		std::cout << "Running just Part Two" << std::endl;
+		std::cout << "Accessible rolls: " << partTwo(argv[1]) << std::endl;
+		return 0;
+	}
+	else if (argc >= 2)
+	{
+		std::cout << "Accessible rolls for Part One: " << partOne(argv[1]) << std::endl;
+		std::cout << "Accessible rolld for Part Two: " << partTwo(argv[1]) << std::endl;
+		return 0;
+	}
+	else
+	{
+		std::cerr << "No input file provided, first argument should be the name of the input file" << std::endl;
+		return -1;
 	}
 }

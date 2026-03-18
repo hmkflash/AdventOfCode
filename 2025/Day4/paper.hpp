@@ -4,10 +4,10 @@
 #include <vector>
 
 // Returns the number of rolls of paper that can be removed after one pass.
-int partOne();
+int partOne(std::string inputName);
 
 // Returns the number of rolls of paper that can be removed in total.
-int partTwo();
+int partTwo(std::string inputName);
 
 // Generates the vector off of a inputName.
 void parseData(std::string inputName);

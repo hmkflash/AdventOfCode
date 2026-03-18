@@ -9,15 +9,15 @@ paper.o:
 
 .PHONY: run
 run:
-	./paper
+	./paper input.txt
 
 .PHONY: partOne
 partOne:
-	./paper 1
+	./paper input.txt 1
 
 .PHONY: partTwo
 partTwo:
-	./paper 2
+	./paper input.txt 2
 
 .PHONY: clean
 clean:
