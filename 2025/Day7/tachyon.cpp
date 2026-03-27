@@ -18,20 +18,20 @@ void condense(std::vector<std::pair<size_t, ull>> &lasers) {
 
 
 void sort(std::vector<std::pair<size_t, ull>> &lasers) {
-	/*
-	for (size_t i = 1; i < lasers.size(); i++) {
+	for (int i = 1; i < (int) lasers.size(); i++) {
 		std::pair<size_t, ull> cur = lasers[i];
 		int j = i - 1;
-		while (j >= 0 && lasers[i].first > cur.first) {
+		while (j >= 0 && lasers[j].first > cur.first) {
 			lasers[j + 1] = lasers[j];
 			j--;
 		}
 		lasers[j + 1] = cur;
 	}
-	*/
+	/*
 	std::sort(laserPos.begin(), laserPos.end(), [](std::pair<size_t, ull> a, std::pair<size_t, ull> b){
 		return (a.first <= b.first);
 	});
+	*/
 	condense(lasers);
 }
 
