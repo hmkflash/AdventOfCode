@@ -1,3 +1,19 @@
+/**
+ * @author Holden Kuempel
+ * 
+ * This program was developed to solve the 2025 Advent of Code Day 7, parts 1 and 2.
+ * 
+ * The challenge involves a tachyon beam and manifold. The beam will travel down the data from where its start 
+ * location marked with "S" and splits anytime it encounters a reflactor ('^') along its path. In part one, the
+ * goal is to count the number of splits that occur along its path. In part two, the goal is to count the number
+ * of timelines available, or the sum of the ways in which a beam can reach its final destinations.
+ * 
+ * This program requires the name of an input file as the first argument and may take in an argument of 1 or 2. If 
+ * it is provided it will only run that part of the challenge. Otherwise, it will run both parts.
+ * 
+ * To complete this challenge yourself go to: https://adventofcode.com/2025/day/7
+ */
+
 #include "tachyon.hpp"
 
 // First is the index that a particular tachyon is located.
@@ -5,6 +21,7 @@
 std::vector<std::pair<size_t, ull>> laserPos;
 ull total1 = 0; // Keeps track of the number of times the beam is split.
 ull total2 = 0; // Totals the number of individual timelines.
+
 
 void condense(std::vector<std::pair<size_t, ull>> &lasers) {
 	for (size_t i = 0; i < lasers.size() - 1; i++) {
@@ -35,7 +52,11 @@ void sort(std::vector<std::pair<size_t, ull>> &lasers) {
 	condense(lasers);
 }
 
-
+// Iterates through each line of input. If that line is the starting line (contains an "S") then it adds a new 
+// pair to the laserPos. If that line contains an '^' then it searches for the laserPos Pair that matches the 
+// location of each '^' and splits the laser at the point. Otherwise, it treats it as a blank line. In all cases 
+// it adds an altered version of line to logVisual.txt to show the locations of the lines and adds the current 
+// list of laserPos to logPositions.txt
 void solveProblem(std::string inputName) {
 	std::ifstream input (inputName);
 	std::ofstream outVis ("logVisual.txt");
@@ -53,7 +74,7 @@ void solveProblem(std::string inputName) {
 				temp.first = line.find('S');
 				temp.second = 1;
 				laserPos.push_back(temp);
-			} else {
+			} else { // Is a row containing reflactors
 				size_t index = 0;
 				std::vector<std::pair<size_t, ull>> newLasers;
 				while (line.find('^', index) != std::string::npos) {
@@ -65,34 +86,36 @@ void solveProblem(std::string inputName) {
 							temp.first = it->first + 2;
 							temp.second = it->second;
 							newLasers.push_back(temp);
-							//line[foundPos - 1] = '|';
-							//line[foundPos + 1] = '|';
-							//index = foundPos + 1;
 							total1++;
 							break;
 						}
 					}
 					index = foundPos + 1;
 				}
+				// Adds newly created data to laserPos.
 				for (auto it = newLasers.begin(); it != newLasers.end(); it++) {
 					laserPos.push_back(*it);
 				}
-				sort(laserPos);
+				sort(laserPos); // Sorts and contendes data
+				// Updates outVis with new laser Data
 				for (auto it = laserPos.begin(); it != laserPos.end(); it++) {
 					line[it->first] = '|';
 				}
 			}
 			outVis << line << std::endl;
+			// Updates the outPos with the cur positions of the lasers.
 			for (auto it = laserPos.begin(); it != laserPos.end(); it++) {
 				outPos << '(' << it->first << ", " << it->second << "), "; 
 			}
 			outPos << std::endl;
 		}
+		// Sums the timeline weight of all pairs in laserPos.
 		for (auto it = laserPos.begin(); it != laserPos.end(); it++) {
 			total2 += it->second;
 		}
 		input.close();
 		outVis.close();
+		outPos.close();
 	}
 }
 
