@@ -20,3 +20,6 @@ ull partOne(std::string inputName);
 
 // Takes in arguments to determine which parts to run.
 ull partTwo(std::string inputName);
+
+// Takes in arguments to determine which parts to run.
+int main (int argc, char* argv[]);
