@@ -42,6 +42,7 @@
 
 # input data for advent of code
 input.txt
+kinput.txt
 
 # debug info for advent of code
 log*
